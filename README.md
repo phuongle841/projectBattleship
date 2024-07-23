@@ -18,3 +18,6 @@
 - wget -O webpack.dev.js https://raw.githubusercontent.com/phuongle841/projectWeatherApp/main/webpack.dev.js
 - wget -O webpack.prod.js https://raw.githubusercontent.com/phuongle841/projectWeatherApp/main/webpack.prod.js
 - touch .gitignore
+- npm install --save-dev babel-jest @babel/core @babel/preset-env
+- touch babel.config.js
+- npm install --save-dev jest
