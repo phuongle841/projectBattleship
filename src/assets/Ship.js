@@ -1,26 +1,20 @@
 class Ship {
   length;
-  hit;
+  hits;
   sunk;
   constructor(length) {
     this.length = length;
-    this.hit = 0;
+    this.hits = 0;
     this.sunk = false;
   }
   hit() {
-    this.hit = this.hit + 1;
+    this.hits++;
+    if (this.hits == this.length) {
+      this.sunk = true;
+    }
   }
   isSunk() {
-    return this.hit == this.length;
-  }
-  doBS() {
-    console.log("this is bull shit");
-  }
-  hit2() {
-    this.hit++;
+    return this.sunk;
   }
 }
-// export default Ship;
-const shipInstance = new Ship(2);
-
-shipInstance.hit2();
+export default Ship;
