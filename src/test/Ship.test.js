@@ -15,6 +15,5 @@ test("test isSunk function", () => {
   const shipInstance = new Ship(2);
   shipInstance.hit();
   shipInstance.hit();
-  let object = { length: 2, hits: 2, sunk: true };
-  expect(shipInstance).toEqual(object);
+  expect(shipInstance.isSunk()).toEqual(true);
 });
