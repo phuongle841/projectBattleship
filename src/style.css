@@ -1,3 +1,32 @@
 body {
   background-color: antiquewhite;
 }
+.container {
+  width: 1000px;
+  height: 500px;
+  background-color: #eee;
+  display: flex;
+  gap: 10px;
+}
+.player1,
+.player2 {
+  width: 50%;
+  height: 100%;
+  background-color: rgb(19, 41, 116);
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 2px;
+}
+.cell {
+  background-color: #fabd7f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cell:hover {
+  background-color: #eee;
+}
+.cell.ship {
+  background-color: #bbb;
+}

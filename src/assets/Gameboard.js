@@ -16,7 +16,9 @@ class GameBoard {
   }
 
   createShip(xBegin, yBegin, xEnd, yEnd) {
-    this.#checkValid(xBegin, yBegin, xEnd, yEnd);
+    if (this.#checkValid(xBegin, yBegin, xEnd, yEnd)) {
+      return false;
+    }
     if (xBegin > xEnd) {
       xEnd = [xBegin, (xBegin = xEnd)][0];
     }
@@ -44,7 +46,7 @@ class GameBoard {
     }
   }
   #checkValid(...input) {
-    if (this.#checkInBound(input)) {
+    if (this.#checkInBound(input) && !this.#checkCrossShip(input)) {
       return false;
     } else {
       return true;
@@ -53,25 +55,38 @@ class GameBoard {
   #checkInBound(input) {
     let result = true;
     input.forEach((element) => {
-      if (result > 10 && result < 1) {
+      if (element > 10 && element < -1) {
         result = false;
       }
     });
     return result;
   }
-  receiveAttack(x, y) {}
+  #checkCrossShip(input) {
+    let result = false;
+    return result;
+  }
   getHits(X, Y) {
-    console.log(this.shipList);
     let result = false;
     this.shipList.forEach((shipInform) => {
       if (
-        X >= shipInform.xBegin &&
+        X > shipInform.xBegin &&
         X <= shipInform.xEnd &&
-        Y >= shipInform.yBegin &&
+        Y > shipInform.yBegin &&
         Y <= shipInform.yEnd
       ) {
         shipInform.ship.hit();
         result = true;
+      }
+    });
+    result ? this.hits.push(X, Y) : this.misses.push(X, Y);
+    return result;
+  }
+  checkAllSunk() {
+    let result = true;
+    this.shipList.forEach((ship) => {
+      if (ship.ship.sunk == false) {
+        result = false;
+        return;
       }
     });
     return result;
