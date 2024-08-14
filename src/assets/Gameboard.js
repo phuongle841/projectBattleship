@@ -14,7 +14,6 @@ class GameBoard {
     this.misses = [];
     this.shipList = [];
   }
-
   createShip(xBegin, yBegin, xEnd, yEnd) {
     if (this.#checkValid(xBegin, yBegin, xEnd, yEnd)) {
       return false;
@@ -55,7 +54,7 @@ class GameBoard {
   #checkInBound(input) {
     let result = true;
     input.forEach((element) => {
-      if (element > 10 && element < -1) {
+      if (element > 9 && element < 0) {
         result = false;
       }
     });
@@ -67,18 +66,36 @@ class GameBoard {
   }
   getHits(X, Y) {
     let result = false;
+    if (this.#inPreviousHit(X, Y)) {
+      return result;
+    }
     this.shipList.forEach((shipInform) => {
       if (
-        X > shipInform.xBegin &&
-        X <= shipInform.xEnd &&
-        Y > shipInform.yBegin &&
-        Y <= shipInform.yEnd
+        X >= shipInform.xBegin &&
+        X < shipInform.xEnd &&
+        Y >= shipInform.yBegin &&
+        Y < shipInform.yEnd
       ) {
         shipInform.ship.hit();
         result = true;
       }
     });
-    result ? this.hits.push(X, Y) : this.misses.push(X, Y);
+    result ? this.hits.push([X, Y]) : this.misses.push([X, Y]);
+    return result;
+  }
+  #inPreviousHit(X, Y) {
+    let result = false;
+
+    this.hits.forEach((element) => {
+      if (element[0] == X && element[1] == Y) {
+        result = true;
+      }
+    });
+    this.misses.forEach((element) => {
+      if (element[0] == X && element[1] == Y) {
+        result = true;
+      }
+    });
     return result;
   }
   checkAllSunk() {

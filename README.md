@@ -21,3 +21,8 @@
 - npm install --save-dev babel-jest @babel/core @babel/preset-env
 - touch babel.config.js
 - npm install --save-dev jest
+
+# instructions:
+
+- each of ship have a list of coordinates saved by game board
+- game board also have the list of previous hits

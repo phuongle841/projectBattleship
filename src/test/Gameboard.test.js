@@ -22,12 +22,24 @@ test("place ship in reverse", () => {
 });
 
 test("hit test", () => {
-  let X = 3;
-  let Y = 7;
+  let X = 2;
+  let Y = 1;
+  let X2 = 3;
+  let Y2 = 5;
+  let GameBoardInstance = new GameBoard();
+  GameBoardInstance.createShip(X, Y, X2, Y2);
+  expect(GameBoardInstance.getHits(2, 1)).toBe(true);
+});
+
+test("hit test", () => {
+  let X = 2;
+  let Y = 8;
   let X2 = 4;
   let Y2 = 9;
   let GameBoardInstance = new GameBoard();
   GameBoardInstance.createShip(X, Y, X2, Y2);
+  expect(GameBoardInstance.getHits(2, 8)).toBe(true);
+  expect(GameBoardInstance.getHits(3, 8)).toBe(true);
   expect(GameBoardInstance.getHits(4, 8)).toBe(true);
 });
 
@@ -40,7 +52,7 @@ test("all ship is sunk", () => {
   let Y2 = 8;
   let GameBoardInstance = new GameBoard();
   GameBoardInstance.createShip(X, Y, X2, Y2);
-  GameBoardInstance.getHits(4, 8);
+  GameBoardInstance.getHits(3, 7);
   expect(GameBoardInstance.checkAllSunk()).toBe(true);
 });
 test("not all ship is sunk", () => {

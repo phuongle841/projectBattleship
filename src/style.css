@@ -7,9 +7,9 @@ body {
   background-color: #eee;
   display: flex;
   gap: 10px;
+  user-select: none;
 }
-.player1,
-.player2 {
+.container > div {
   width: 50%;
   height: 100%;
   background-color: rgb(19, 41, 116);
@@ -28,5 +28,11 @@ body {
   background-color: #eee;
 }
 .cell.ship {
-  background-color: #bbb;
+  background-color: #65adce;
+}
+.cell.missed {
+  background-color: #525252;
+}
+.cell.hit {
+  background-color: #ffc9c9;
 }
