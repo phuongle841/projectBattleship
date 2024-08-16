@@ -20,7 +20,7 @@ class BoardRender {
         cell.classList.add("cell");
         cell.textContent = `${x}-${y}`;
         cell.addEventListener("click", () => {
-          console.log(this.GameBoard.getHits(cell.dataset.x, cell.dataset.y));
+          this.GameBoard.getHits(cell.dataset.x, cell.dataset.y);
           this.reRender();
         });
         this.base.appendChild(cell);
@@ -29,6 +29,7 @@ class BoardRender {
     this.#checkWithData(this.GameBoard.shipList);
     this.#checkMisses(this.GameBoard.misses);
     this.#checkHit(this.GameBoard.hits);
+    this.#checkStuck(this.GameBoard.stuckSpots);
   }
   #checkWithData(shipList) {
     let cells = this.base.querySelectorAll(".cell");
@@ -67,7 +68,6 @@ class BoardRender {
     positions.forEach((element) => {
       cells.forEach((cell) => {
         if (cell.dataset.x == element[0] && cell.dataset.y == element[1]) {
-          console.log(element);
           cell.classList.add("missed");
         }
       });
@@ -78,8 +78,17 @@ class BoardRender {
     positions.forEach((element) => {
       cells.forEach((cell) => {
         if (cell.dataset.x == element[0] && cell.dataset.y == element[1]) {
-          console.log(element);
           cell.classList.add("hit");
+        }
+      });
+    });
+  }
+  #checkStuck(positions) {
+    let cells = this.base.querySelectorAll(".cell");
+    positions.forEach((element) => {
+      cells.forEach((cell) => {
+        if (cell.dataset.x == element[0] && cell.dataset.y == element[1]) {
+          cell.classList.add("stuck");
         }
       });
     });

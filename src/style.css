@@ -34,5 +34,8 @@ body {
   background-color: #525252;
 }
 .cell.hit {
-  background-color: #ffc9c9;
+  background-color: #ff7e7e;
+}
+.cell.stuck {
+  background-color: #651d7a;
 }
